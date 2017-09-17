@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	 xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 targetNamespace="http://www.uts.edu.au/31284/wsd-diary"
+	 xmlns="http://www.uts.edu.au/31284/wsd-diary"
+	 elementFormDefault="qualified">
+	 
+ 	<xs:simpleType name="nameType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(([A-Z][a-z]+)\s?)+([A-Z][a-z]+)?"/>
+        </xs:restriction>
+  	</xs:simpleType>
+  	
+	<xs:simpleType name="emailType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-z0-9A-Z]+([-|\.]?[a-z0-9A-Z])*@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\.)+[a-zA-Z]{2,}"/>
+        </xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="dateType">
+	    <xs:restriction base="xs:string">
+	        <xs:pattern value="\d{1,2}/\d{1,2}/\d{1,4}"/>
+	    </xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="subjectType">
+	    <xs:restriction base="xs:string">
+	        <xs:enumeration value="WSD"/>
+	        <xs:enumeration value="USP"/>
+	        <xs:enumeration value="SEP"/>
+	        <xs:enumeration value="AppProg"/>
+	        <xs:enumeration value="MobileApp"/>
+	    </xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="statusType">
+	    <xs:restriction base="xs:string">
+	        <xs:enumeration value="available"/>
+	        <xs:enumeration value="unavailable"/>
+	    </xs:restriction>
+	</xs:simpleType>
+	
+	<xs:element name="Tutors">
+	 <xs:complexType>
+	 	<xs:sequence>
+	 		<xs:element name = "Tutor" minOccurs = "0" maxOccurs = "unbounded">
+	 			<xs:complexType>
+	 		<xs:sequence>
+	 			<xs:element name = "Name" type= "nameType"/>
+	 			<xs:element name = "Email" type= "emailType"/>
+	 			<xs:element name = "Password" type= "xs:string"/>
+	 			<xs:element name = "DOB" type= "dateType"/>
+	 			<xs:element name = "Subject" type= "xs:string"/>
+	 			<xs:element name = "Status" type= "xs:string"/>
+	 		</xs:sequence>
+	 	</xs:complexType>
+	 		</xs:element>
+	 		
+	 	</xs:sequence>
+	 </xs:complexType>
+
+	 </xs:element>
+	
+ 
+ 
+</xs:schema>

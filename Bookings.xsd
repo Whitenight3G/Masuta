@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+    <xs:simpleType name="nameType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(([A-Z][a-z]+)\s?)+([A-Z][a-z]+)?"/>
+        </xs:restriction>
+    </xs:simpleType>
+  	
+    <xs:simpleType name="emailType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-z0-9A-Z]+([-|\.]?[a-z0-9A-Z])*@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\.)+[a-zA-Z]{2,}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="subjectType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="WSD"/>
+            <xs:enumeration value="USP"/>
+            <xs:enumeration value="SEP"/>
+            <xs:enumeration value="AppProg"/>
+            <xs:enumeration value="MobileApp"/>
+        </xs:restriction>
+    </xs:simpleType>
+	
+    <xs:simpleType name="statusType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="completed"/>
+            <xs:enumeration value="active"/>
+            <xs:enumeration value="cancelled"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:element name="Bookings">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name = "listing" minOccurs = "0" maxOccurs = "unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name = "ID" type= "xs:string"/>
+                            <xs:element name = "tutEmail" type= "emailType"/>
+                            <xs:element name = "tutName" type= "nameType"/>
+                            <xs:element name = "Subject" type= "subjectType"/>
+                            <xs:element name = "stuEmail" type= "emailType"/>
+                            <xs:element name = "stuName" type= "nameType"/>
+                            <xs:element name = "Status" type= "statusType"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+	 		
+            </xs:sequence>
+        </xs:complexType>
+
+    </xs:element>
+</xs:schema>

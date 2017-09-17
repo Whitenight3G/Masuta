@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tutors 
+	xmlns="http://www.uts.edu.au/31284/wsd-diary"
+ 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  	xsi:schemaLocation="http://www.uts.edu.au/31284/wsd-diary tutors.xsd">
+  	
+	<Tutor>
+		<Name>Alen Moo</Name>
+		<Email>Moo666@uts.edu.au.com</Email>
+		<Password>mooo</Password>
+		<DOB>06/06/1966</DOB>
+		<Subject>WSD</Subject>
+		<Status>available</Status>
+	</Tutor>
+	<Tutor>
+		<Name>Ruby Red</Name>
+		<Email>redredred@qq.com</Email>
+		<Password>rrrrrrr</Password>
+		<DOB>08/07/1983</DOB>
+		<Subject>SEP</Subject>
+		<Status>available</Status>
+	</Tutor>
+	<Tutor>
+		<Name>Lucia Blue</Name>
+		<Email>iniBlue@gmail.com</Email>
+		<Password>lblblb</Password>
+		<DOB>26/01/1986</DOB>
+		<Subject>USP</Subject>
+		<Status>available</Status>
+	</Tutor>
+	<Tutor>
+		<Name>Hat Green</Name>
+		<Email>hgVideo@unsw.edu.au</Email>
+		<Password>green</Password>
+		<DOB>03/06/1992</DOB>
+		<Subject>AppProg</Subject>
+		<Status>available</Status>
+	</Tutor>
+	<Tutor>
+		<Name>Cold Hot</Name>
+		<Email>Warm233@uts.edu.au.com</Email>
+		<Password>warmlight</Password>
+		<DOB>06/12/1969</DOB>
+		<Subject>MobileApp</Subject>
+		<Status>available</Status>
+	</Tutor>
+        <Tutor>
+		<Name>Edward R</Name>
+		<Email>erenardo@gmail.com</Email>
+		<Password>hello</Password>
+		<DOB>12/07/1998</DOB>
+		<Subject>MobileApp</Subject>
+		<Status>unavailable</Status>
+	</Tutor>
+</Tutors>

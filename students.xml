@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Students 
+    xmlns="http://www.uts.edu.au/31284/wsd-diary"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.uts.edu.au/31284/wsd-diary students.xsd">
+	<Student>
+		<Name>Alice Louisa</Name>
+		<Email>AL080796@gmail.com</Email>
+		<Password>qwer123</Password>
+		<DOB>08/07/1996</DOB>
+	</Student>
+	<Student>
+		<Name>Poi Moe</Name>
+		<Email>PoiDog@gmail.com</Email>
+		<Password>000</Password>
+		<DOB>28/06/2006</DOB>
+	</Student>
+	<Student>
+		<Name>Kai Cook</Name>
+		<Email>23koociak@hotmail.com</Email>
+		<Password>plmqazfj</Password>
+		<DOB>08/07/1996</DOB>
+	</Student>
+	<Student>
+		<Name>Karen Wu</Name>
+		<Email>74923704@QQ.com</Email>
+		<Password>1234566</Password>
+		<DOB>09/03/2002</DOB>
+	</Student>
+	<Student>
+		<Name>Eden San</Name>
+		<Email>EdS888@360.com</Email>
+		<Password>Eds666</Password>
+		<DOB>12/12/1990</DOB>
+	</Student>
+	
+</Students>
