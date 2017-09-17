@@ -31,7 +31,7 @@
                     for (Tutor tutor : tutors.getList()) {
                         if (tutor.getSubject().equals(chosenSubject) && tutor.getStatus().equals("availaible")) {
                 %>
-                <tr><td><input type="radio" name=tutor.getName()></td><%out.print(tutor.showCredential());%></tr>
+                <tr><td><input type="radio" name="bookedTut" value=tutor.getName()></td><%out.print(tutor.showCredential());%></tr>
 
                 <%
                         }
@@ -51,7 +51,7 @@
                     for (Tutor tutor : tutors.getList()) {
                         if (tutor.getSubject().equals(chosenSubject) && tutor.getStatus().equals("availaible")) {
                 %>
-                <tr><td><input type="radio" name=tutor.getName()></td><%out.print(tutor.showCredential());%></tr>
+                <tr><td><input type="radio" name="bookedTut" value=tutor.getName()></td><%out.print(tutor.showCredential());%></tr>
 
                 <%
                         }
