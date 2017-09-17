@@ -29,9 +29,10 @@
         <form action="BookingConfirmation.jsp" method="POST"><table>
                 <%
                     for (Tutor tutor : tutors.getList()) {
-                        if (tutor.getSubject().equals(chosenSubject) && tutor.getStatus().equals("available")) {
+                        if (tutor.getSubject().equals(chosenSubject) && tutor.getStatus().equals("availaible")) {
                 %>
                 <tr><td><input type="radio" name=tutor.getName()></td><%out.print(tutor.showCredential());%></tr>
+
                 <%
                         }
                     }
@@ -48,7 +49,7 @@
         <form action="BookingConfirmation.jsp" method="POST"><table>
                 <%
                     for (Tutor tutor : tutors.getList()) {
-                        if (tutor.getSubject().equals(chosenSubject) && tutor.getStatus().equals("available")) {
+                        if (tutor.getSubject().equals(chosenSubject) && tutor.getStatus().equals("availaible")) {
                 %>
                 <tr><td><input type="radio" name=tutor.getName()></td><%out.print(tutor.showCredential());%></tr>
 
