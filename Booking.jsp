@@ -20,51 +20,62 @@
             <jsp:setProperty name="tutorApp" property="filePath" value="<%=filePath%>"/>
         </jsp:useBean>
         <h1>Book A Human Now!</h1>
-        <%
-            Tutors tutors = tutorApp.getTutors();
-            if (request.getParameter("subjectBook") != null) {
-                out.println("subject book");
-                String chosenSubject = request.getParameter("subject");
-        %>
-        <form action="BookingConfirmation.jsp" method="POST"><table>
-                <%
-                    for (Tutor tutor : tutors.getList()) {
-                        if (tutor.getSubject().equals(chosenSubject) && tutor.getStatus().equals("availaible")) {
-                %>
-                <tr><td><input type="radio" name="bookedTut" value=tutor.getName()></td><%out.print(tutor.showCredential());%></tr>
+        <form action="BookingConfirmation.jsp" method="POST">
+            <table><thead><tr><td></td><td>Tutor's name</td><td>Tutor's email</td><td>Subject</td></tr></thead>
+                <tbody>
+                    <%
+                        Tutors tutors = tutorApp.getTutors();
+                        if (request.getParameter("subjectBook") != null) {
+                            out.println("Filtered by SUBJECT");
+                            String chosenSubject = request.getParameter("subject");
+                            for (Tutor tutor : tutors.getList()) {
+                                if (tutor.getSubject().equals(chosenSubject) && tutor.getStatus().equals("available")) {
+                    %>
+                    <tr><td><input type="radio" name="bookedTut" value=tutor.getName()></td><%out.print(tutor.showCredential());%></tr>
+                            <%
+                                    }
+                                }
+                            } else if (request.getParameter("nameBook") != null) {
+                                out.println("Filtered by NAME");
+                                String chosenName = request.getParameter("TutName");
+                                for (Tutor tutor : tutors.getList()) {
+                                    if (tutor.getName().contains(chosenName) && tutor.getStatus().equals("available")) {
+                            %>
+                    <tr><td><input type="radio" name="bookedTut" value=tutor.getName()></td><%out.print(tutor.showCredential());%></tr>
+                            <%
+                                    }
+                                }
+                            } else if (request.getParameter("statusBook") != null && request.getParameter("status").equals("available")) {
+                                out.println("Filtered by STATUS");
+                                String chosenStatus = request.getParameter("status");
+                                for (Tutor tutor : tutors.getList()) {
+                                    if (tutor.getStatus().equals("available")) {
+                            %>
+                    <tr><td><input type="radio" name="bookedTut" value=tutor.getName()></td><%out.print(tutor.showCredential());%></tr>
+                            <%
+                                    }
+                                }
+                            } else if (request.getParameter("statusBook") != null && request.getParameter("status").equals("unavailable")) {
+                                out.println("list of unavailable teachers:");
+                                for (Tutor tutor : tutors.getList()) {
+                                    if (tutor.getStatus().equals("unavailable")) {
+                            %>
+                    <tr><td><%out.print(tutor.showCredential());%></td></tr>
+                        <%
+                                }
+                            }
 
-                <%
+                        } else {
+                        %>
+                    <tr><td></td><td>null</td><td>null</td><td>null</td></tr>
+                    <%
                         }
-                    }
 
-                %>
-                <input type="submit" value="Book!">
+
+                    %>
+                </tbody>
             </table>
+            <input type="submit" value="Book!"><button onclick="location.href = 'StudentMain.jsp';">cancel</button>
         </form>
-        <%  }
-            if (request.getParameter("nameBook") != null) {
-                out.println("name book");
-                String chosenSubject = request.getParameter("subject");
-        %>
-        <form action="BookingConfirmation.jsp" method="POST"><table>
-                <%
-                    for (Tutor tutor : tutors.getList()) {
-                        if (tutor.getSubject().equals(chosenSubject) && tutor.getStatus().equals("availaible")) {
-                %>
-                <tr><td><input type="radio" name="bookedTut" value=tutor.getName()></td><%out.print(tutor.showCredential());%></tr>
-
-                <%
-                        }
-                    }
-
-                %>
-                <input type="submit" value="Book!">
-            </table>
-        </form>
-        <%  }
-            if (request.getParameter("statusBook") != null) {
-                out.println("status book");
-            }
-        %>
     </body>
 </html>
