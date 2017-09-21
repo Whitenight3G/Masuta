@@ -7,7 +7,6 @@
     </head>
     <body bgcolor="#66ccff">
         <h1 align="center">Welcome to UTSTutor</h1>
-        <jsp:include page="date.jsp" flush="true" />  
         <hr>
         <p align="center"><u><a href="register.jsp">Register</a></u></p>
         <p align="center"><u><a href="Login.html">Login</a></u></p>
