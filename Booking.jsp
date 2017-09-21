@@ -15,6 +15,7 @@
 
     <body>
         <% String filePath = application.getRealPath("WEB-INF/tutors.xml");
+        boolean show = true;
         %>
         <jsp:useBean id="tutorApp" class="uts.wsd.TutorApp" scope="application">
             <jsp:setProperty name="tutorApp" property="filePath" value="<%=filePath%>"/>
@@ -31,7 +32,7 @@
                             for (Tutor tutor : tutors.getList()) {
                                 if (tutor.getSubject().equals(chosenSubject) && tutor.getStatus().equals("available")) {
                     %>
-                    <tr><td><input type="radio" name="bookedTut" value=tutor.getName()></td><%out.print(tutor.showCredential());%></tr>
+                    <tr><td><input type="radio" name="bookedTut" value="<%= tutor.getName()%>"></td><%out.print(tutor.showCredential());%></tr>
                             <%
                                     }
                                 }
@@ -41,7 +42,7 @@
                                 for (Tutor tutor : tutors.getList()) {
                                     if (tutor.getName().contains(chosenName) && tutor.getStatus().equals("available")) {
                             %>
-                    <tr><td><input type="radio" name="bookedTut" value=tutor.getName()></td><%out.print(tutor.showCredential());%></tr>
+                    <tr><td><input type="radio" name="bookedTut" value="<%= tutor.getName()%>"></td><%out.print(tutor.showCredential());%></tr>
                             <%
                                     }
                                 }
@@ -50,13 +51,15 @@
                                 String chosenStatus = request.getParameter("status");
                                 for (Tutor tutor : tutors.getList()) {
                                     if (tutor.getStatus().equals("available")) {
+                                    String tutName = tutor.getName();
                             %>
-                    <tr><td><input type="radio" name="bookedTut" value=tutor.getName()></td><%out.print(tutor.showCredential());%></tr>
+                    <tr><td><input type="radio" name="bookedTut" value="<%= tutor.getName()%>"></td><%out.print(tutor.showCredential());%></tr>
                             <%
                                     }
                                 }
                             } else if (request.getParameter("statusBook") != null && request.getParameter("status").equals("unavailable")) {
                                 out.println("list of unavailable teachers:");
+                                show = false;
                                 for (Tutor tutor : tutors.getList()) {
                                     if (tutor.getStatus().equals("unavailable")) {
                             %>
@@ -75,7 +78,6 @@
                     %>
                 </tbody>
             </table>
-            <input type="submit" value="Book!"><button onclick="location.href = 'StudentMain.jsp';">cancel</button>
-        </form>
+            <% if(show==true){%><input type="submit" value="Book!"></form><%}%><button onclick="location.href = 'StudentMain.jsp';">cancel</button>
     </body>
 </html>
