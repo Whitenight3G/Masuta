@@ -10,7 +10,7 @@
         <h1>Register</h1>
 
 
-        <form action="welcome.jsp" method="post">
+        <form action="regisConfirm.jsp" method="post">
             <table align="center">
 
                 <tr><td>Full name</td> <td><input type="text" name="name" required></td></tr>
