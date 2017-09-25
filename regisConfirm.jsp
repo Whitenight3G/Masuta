@@ -28,6 +28,18 @@
     session.setAttribute("user", student);
 %>
 
+<% String filePath = application.getRealPath("WEB-INF/students.xml");%>
+<jsp:useBean id="studentApp" class="uts.wsd.StudentApp" scope="application">
+    <jsp:setProperty name="studentApp" property="filePath" value="<%=filePath%>"/>
+</jsp:useBean>
+
+<%
+    studentApp.loadStudents();
+    studentApp.getStudents().addStudent(student);
+    studentApp.saveStudents();
+%>
+<%=studentApp.getStudents().getList().size()%>
+
 <%
 } else {
 %>
@@ -42,6 +54,18 @@
     Tutor tutor = new Tutor(name, email, password, dob, subject, status);
     session.setAttribute("user", tutor);
 %>
+
+<% String filePath = application.getRealPath("WEB-INF/tutors.xml");%>
+<jsp:useBean id="tutorApp" class="uts.wsd.TutorApp" scope="application">
+    <jsp:setProperty name="tutorApp" property="filePath" value="<%=filePath%>"/>
+</jsp:useBean>
+
+<%
+    tutorApp.loadTutors();
+    tutorApp.getTutors().addTutor(tutor);
+    tutorApp.saveTutors();
+%>
+<%=tutorApp.getTutors().getList().size()%>
 
 <%
     }
