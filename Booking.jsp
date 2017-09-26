@@ -1,7 +1,7 @@
 <%-- 
     Document   : Booking
-    Created on : 12/09/2017, 10:33:49 PM
-    Author     : erena
+    Created on : 26-Sep-2017, 11:26:22
+    Author     : ASUS
 --%>
 
 <%@page import="uts.wsd.*"%>
@@ -10,74 +10,85 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Book a human!</title>
-    </head>
+        <title>Main Page</title>
+    <h1 align="center" style="font-size:185px; background-color:white"><img src="Images/uts.jpg" alt="uts">Tutor</h1>
+</head>
+<%if (session.getAttribute("user") != null) {
+        String filePath = application.getRealPath("WEB-INF/tutors.xml");
+        String filePathB = application.getRealPath("WEB-INF/bookings.xml");%>
+<jsp:useBean id="bookingApp" class="uts.wsd.BookingApp" scope="application">
+    <jsp:setProperty name="bokingApp" property="filePath" value="<%=filePathB%>"/>
+</jsp:useBean>
+<jsp:useBean id="tutorApp" class="uts.wsd.TutorApp" scope="application">
+    <jsp:setProperty name="tutorApp" property="filePath" value="<%=filePath%>"/>
+</jsp:useBean>
+<%
+    Tutors tutors = tutorApp.getTutors();
+    if (session.getAttribute("user").getClass().toString().equals("class uts.wsd.Student")) {
+        //check if the "user" is a student
+        Student student = (Student) session.getAttribute("user");
+        String stuEmail = student.getEmail();
+        String stuName = student.getName();
 
-    <body>
-        <% String filePath = application.getRealPath("WEB-INF/tutors.xml");
-        boolean show = true;
-        %>
-        <jsp:useBean id="tutorApp" class="uts.wsd.TutorApp" scope="application">
-            <jsp:setProperty name="tutorApp" property="filePath" value="<%=filePath%>"/>
-        </jsp:useBean>
-        <h1>Book A Human Now!</h1>
-        <form action="BookingConfirmation.jsp" method="POST">
-            <table><thead><tr><td></td><td>Tutor's name</td><td>Tutor's email</td><td>Subject</td></tr></thead>
-                <tbody>
-                    <%
-                        Tutors tutors = tutorApp.getTutors();
-                        if (request.getParameter("subjectBook") != null) {
-                            out.println("Filtered by SUBJECT");
-                            String chosenSubject = request.getParameter("subject");
-                            for (Tutor tutor : tutors.getList()) {
-                                if (tutor.getSubject().equals(chosenSubject) && tutor.getStatus().equals("available")) {
-                    %>
-                    <tr><td><input type="radio" name="bookedTut" value="<%= tutor.getName()%>"></td><%out.print(tutor.showCredential());%></tr>
-                            <%
-                                    }
-                                }
-                            } else if (request.getParameter("nameBook") != null) {
-                                out.println("Filtered by NAME");
-                                String chosenName = request.getParameter("TutName");
-                                for (Tutor tutor : tutors.getList()) {
-                                    if (tutor.getName().contains(chosenName) && tutor.getStatus().equals("available")) {
-                            %>
-                    <tr><td><input type="radio" name="bookedTut" value="<%= tutor.getName()%>"></td><%out.print(tutor.showCredential());%></tr>
-                            <%
-                                    }
-                                }
-                            } else if (request.getParameter("statusBook") != null && request.getParameter("status").equals("available")) {
-                                out.println("Filtered by STATUS");
-                                String chosenStatus = request.getParameter("status");
-                                for (Tutor tutor : tutors.getList()) {
-                                    if (tutor.getStatus().equals("available")) {
-                                    String tutName = tutor.getName();
-                            %>
-                    <tr><td><input type="radio" name="bookedTut" value="<%= tutor.getName()%>"></td><%out.print(tutor.showCredential());%></tr>
-                            <%
-                                    }
-                                }
-                            } else if (request.getParameter("statusBook") != null && request.getParameter("status").equals("unavailable")) {
-                                out.println("list of unavailable teachers:");
-                                show = false;
-                                for (Tutor tutor : tutors.getList()) {
-                                    if (tutor.getStatus().equals("unavailable")) {
-                            %>
-                    <tr><td><%out.print(tutor.showCredential());%></td></tr>
-                        <%
-                                }
+%>
+
+<body>
+    <table>
+        <form action="Booking.jsp">
+            <input type="submit" value="Create a booking" name="Book"><input type="submit" value="View a booking" name="Book"><input type="submit" value="Cancel booking" name="Book"><input type="submit" value="View all bookings" name="Book">
+        </form>
+    </table>
+    <%        if (request.getParameter("bookedTut") != null) {
+            Tutor tutor = tutorApp.getTutors().getTutor(request.getParameter("bookedTut"));
+            int newID = bookingApp.getBookings().getLastBooking();
+            Booking booking = new Booking(newID, tutor.getEmail(), tutor.getName(), tutor.getSubject(), stuName, stuEmail, "active");
+            bookingApp.getBookings().addBooking(booking);
+            tutorApp.getTutors().getTutor(request.getParameter("bookedTut")).setStatus("unavailable");%>
+    <p>Booking successful! Click <a href="Main.jsp"><u>here</u></a> to go back to the main menu.</p>
+                <%
+                    }
+
+                %>
+</body> 
+<%} else if (session.getAttribute("user").getClass().toString().equals("class uts.wsd.Tutor")) {
+    //if the "user" is a tutor
+    Tutor tutor = (Tutor) session.getAttribute("user");
+    String tutEmail = tutor.getEmail();
+    String tutName = tutor.getName();
+%>
+<body>
+    <table>
+        <form action="Booking.jsp">
+            <input type="submit" value="View a booking" name="Book"><input type="submit" value="Cancel booking" name="Book"><input type="submit" value="View all bookings" name="Book"><input type="submit" value="Complete a booking" name="Book">
+
+        </form>
+    </table>
+
+    <% if (request.getParameter("Book") != null) {
+            if (request.getParameter("Book").equals("Complete a booking")) {
+                //code to complete the available booking
+    %>
+    <form action="BookingConfirmation.jsp">
+        <table>
+            <thead
+                <tr><td>select</td><td>ID</td><td>Student Email</td><td>Student Name</td></tr>
+            </thead>
+            <tbody>
+                <%
+                    for (Booking booking : bookingApp.getBookings().getList()) {
+                        if (booking.getTutEmail().equals(tutEmail)) {%>
+                <tr><td><input type="radio" name="completeBooking" value="<%=booking.getStuEmail()%>"</td><td><%=booking.getStuEmail()%></td><td><%=booking.getStuName()%></td></tr>
+                        <%}
                             }
-
-                        } else {
                         %>
-                    <tr><td></td><td>null</td><td>null</td><td>null</td></tr>
-                    <%
-                        }
-
-
-                    %>
-                </tbody>
-            </table>
-            <% if(show==true){%><input type="submit" value="Book!"></form><%}%><button onclick="location.href = 'StudentMain.jsp';">cancel</button>
-    </body>
+            </tbody>
+        </table>
+    </form>
+    <%
+            }
+        }
+    %>
+</body>    
+<%}
+                }%>
 </html>
