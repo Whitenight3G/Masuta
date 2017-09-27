@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Logout</title>
     </head>
-    <body bgcolor="#9ae59a">
+    <body>
         <%
             session.invalidate();
         %>
