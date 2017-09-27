@@ -14,27 +14,27 @@
             <table align="center">
 
                 <tr><td>Full name</td> <td><input type="text" name="name" required></td></tr>
-                <tr><td>Email</td> <td><input type="text" name="email" required></td></tr>
+                <tr><td>Email</td> <td><input type="email" name="email" required></td></tr>
                 <tr><td>Password</td> <td><input type="password" name="password" required></td></tr>
-                <tr><td>Date of birth</td> <td><input type="text" name="dob" placeholder="dd/mm/yyyy" required></td></tr>
-                <tr><td>User</td> <td> <select name="user" onchange="if (this.value === 'tutor') {
+                <tr><td>Date of birth</td> <td><input type="date" name="dob" required></td></tr>
+                <tr><td>User</td> <td> <select name="user" onchange="if (this.value === 'Tutor') {
                             this.form['subject'].style.visibility = 'visible';
                         } else {
                             this.form['subject'].style.visibility = 'hidden';
                         }
                         ;">
                             <option value="">- Select User Type -</option>
-                            <option value="student">Student</option>
-                            <option value="tutor">Tutor</option>
+                            <option value="Student">Student</option>
+                            <option value="Tutor">Tutor</option>
                         </select></td></tr>
                     
                 <tr><td>Subject</td> <td> <select name="subject" style="visibility:hidden;">
                             <option value="">- Select Your Subject -</option>
-                            <option value="wsd">WSD</option>
-                            <option value="usp">USP</option>
-                            <option value="sep">SEP</option>
-                            <option value="appProg">Applications Programming</option>
-                            <option value="mobileApp">Mobile Applications</option>
+                            <option value="WSD">WSD</option>
+                            <option value="USP">USP</option>
+                            <option value="SEP">SEP</option>
+                            <option value="AppProg">Applications Programming</option>
+                            <option value="MobileApp">Mobile Applications</option>
                         </select></td></tr>
 
                 <tr><td></td> <td><input type="submit" value="Register"></td></tr>
