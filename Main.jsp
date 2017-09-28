@@ -1,5 +1,5 @@
 <%-- 
-    Document   : TutorMain
+    Document   : Main
     Created on : 11/09/2017, 3:22:57 PM
     Author     : erena
 --%>
@@ -14,32 +14,12 @@
     <h1 align="center" style="font-size:185px; background-color:white"><img src="Images/uts.jpg" alt="uts">Tutor</h1>
 </head>
 <%if (session.getAttribute("user") != null) {
-        if (session.getAttribute("user").getClass().toString().equals("class uts.wsd.Tutor")) {
-            //check if the "user" is a tutor
-            Tutor tutor = (Tutor) session.getAttribute("user");
-            if (tutor != null) {
-                String filePathT = application.getRealPath("WEB-INF/tutors.xml");
-                String email = request.getParameter("email");
-                String name = request.getParameter("name");
-                String password = request.getParameter("password");
-                String dob = request.getParameter("dob");
-                String subject = request.getParameter("subject");
-                String status = request.getParameter("status");%>
-<body background="Images/wool.jpg">
-    you're A tutor!
-</body>
-<%}
-}//end of tutor user
-else if (session.getAttribute("user").getClass().toString().equals("class uts.wsd.Student")) {
-    //check if the "user" is a student
-    Student student = (Student) session.getAttribute("user");
-    if (student != null) {
-        String filePath = application.getRealPath("WEB-INF/tutors.xml");
-        String filePathS = application.getRealPath("WEB-INF/students.xml");
-        String email = request.getParameter("email");
-        String name = request.getParameter("name");
-        String password = request.getParameter("password");
-        String dob = request.getParameter("dob");%>
+        if (session.getAttribute("user").getClass().toString().equals("class uts.wsd.Student")) {
+            //check if the "user" is a student
+            Student student = (Student) session.getAttribute("user");
+
+            if (student != null) {
+                String filePath = application.getRealPath("WEB-INF/tutors.xml");%>
 <jsp:useBean id="tutorApp" class="uts.wsd.TutorApp" scope="application">
     <jsp:setProperty name="tutorApp" property="filePath" value="<%=filePath%>"/>
 </jsp:useBean>
@@ -54,6 +34,7 @@ else if (session.getAttribute("user").getClass().toString().equals("class uts.ws
         </table>
     </form>
     <%
+
         if (request.getParameter("search") != null && request.getParameter("search").equals("subject")) {
             //if the search by has been applied%>
     <form action="Main.jsp">
@@ -88,7 +69,7 @@ else if (session.getAttribute("user").getClass().toString().equals("class uts.ws
 
 <%} if(request.getParameter("subjectBook") != null || request.getParameter("nameBook") != null || request.getParameter("statusBook") != null){
     //show result of the search bar%>
-<form action="BookingConfirmation.jsp" method="POST">
+<form action="Booking.jsp" method="POST">
     <table class="middle">
         <thead>
             <tr><td></td><td>Tutor's name</td><td>Tutor's email</td><td>Subject</td><td>Status</td></tr>
@@ -106,7 +87,7 @@ else if (session.getAttribute("user").getClass().toString().equals("class uts.ws
                             match = true;
                             show = true;
             %>
-            <tr><td><input type="radio" name="bookedTut" value="<%= tutor.getName()%>"></td><td><%= tutor.getName()%></td><td><%= tutor.getEmail()%></td><td><%= tutor.getSubject()%></td><td><%= tutor.getStatus()%></td></tr>
+            <tr><td><input type="radio" name="bookedTut" value="<%= tutor.getEmail()%>"></td><td><%= tutor.getName()%></td><td><%= tutor.getEmail()%></td><td><%= tutor.getSubject()%></td><td><%= tutor.getStatus()%></td></tr>
                     <%
                             }
                         }
@@ -118,7 +99,7 @@ else if (session.getAttribute("user").getClass().toString().equals("class uts.ws
                                 match = true;
                                 show = true;
                     %>
-            <tr><td><input type="radio" name="bookedTut" value="<%= tutor.getName()%>"></td><td><%= tutor.getName()%></td><td><%= tutor.getEmail()%></td><td><%= tutor.getSubject()%></td><td><%= tutor.getStatus()%></td></tr>
+            <tr><td><input type="radio" name="bookedTut" value="<%= tutor.getEmail()%>"></td><td><%= tutor.getName()%></td><td><%= tutor.getEmail()%></td><td><%= tutor.getSubject()%></td><td><%= tutor.getStatus()%></td></tr>
                     <%
                             }
                         }
@@ -132,7 +113,7 @@ else if (session.getAttribute("user").getClass().toString().equals("class uts.ws
                                     match = true;
                                     show = true;
                     %>
-            <tr><td><input type="radio" name="bookedTut" value="<%= tutor.getName()%>"></td><td><%= tutor.getName()%></td><td><%= tutor.getEmail()%></td><td><%= tutor.getSubject()%></td><td><%= tutor.getStatus()%></td></tr>
+            <tr><td><input type="radio" name="bookedTut" value="<%= tutor.getEmail()%>"></td><td><%= tutor.getName()%></td><td><%= tutor.getEmail()%></td><td><%= tutor.getSubject()%></td><td><%= tutor.getStatus()%></td></tr>
                     <%
                             }
                         }
@@ -159,8 +140,9 @@ else if (session.getAttribute("user").getClass().toString().equals("class uts.ws
                 }
             }
         }
-    }//end of student user
-} else if (session.getAttribute("user") == null) {
+    }//end of student user%>
+<a href="Booking.jsp">Go to Booking</a> <a href="Account.jsp">Go to Account</a>
+<%} else if (session.getAttribute("user") == null) {
     //check if the "user" is neither
 %>
 <head>
