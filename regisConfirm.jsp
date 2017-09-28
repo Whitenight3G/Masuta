@@ -15,7 +15,7 @@
 <% String status = request.getParameter("statust");%>
 
 <%
-    if (request.getParameter("user").equals("student")) {
+    if (request.getParameter("user").equals("Student")) {
 %> 
 <h1>Welcome, <%=name%>!</h1>
 <p>Your email is <%=email%></p>
