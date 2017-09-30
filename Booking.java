@@ -5,97 +5,88 @@
  */
 package uts.wsd;
 
-import java.io.Serializable;
 import javax.xml.bind.annotation.*;
+import java.util.*;
+import java.io.Serializable;
 
-/**
- *
- * @author erena
- */
+@XmlRootElement(namespace = "http://www.uts.edu.au/31284/wsd-diary", name = "bookings")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Booking implements Serializable{
-    @XmlElement(name = "ID")
-    private String ID;
-    @XmlElement(name = "tutName")
-    private String tutName;
-    @XmlElement(name = "tutEmail")
-    private String tutEmail;
-    @XmlElement(name = "subject")
-    private String subject;
-    @XmlElement(name = "stuName")
-    private String stuName;
-    @XmlElement(name = "stuEmail")
-    private String stuEmail;
-    @XmlElement(name = "status")
-    private String status;
-    
-    public Booking(){
-        
-    }
-    public Booking(String ID, String tutName, String tutEmail, String subject, String stuName, String stuEmail, String status) {
-        this.ID = ID;
-        this.tutName = tutName;
-        this.tutEmail = tutEmail;
-        this.subject = subject;
-        this.stuName = stuName;
-        this.stuEmail = stuEmail;
-        this.status = status;
+public class Bookings implements Serializable {
+
+    @XmlElement(name = "booking")
+    private ArrayList<Booking> list = new ArrayList<Booking>();
+    private int id = 0;
+
+    public Bookings() {
+        // TODO Auto-generated constructor stub
+
     }
 
-    public String getID() {
-        return ID;
+    public ArrayList<Booking> getList() {
+        return list;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void addBooking(Booking booking) {
+        list.add(booking);
     }
 
-    public String getTutName() {
-        return tutName;
+    public void removeBooking(Booking booking) {
+        list.remove(booking);
     }
 
-    public void setTutName(String tutName) {
-        this.tutName = tutName;
+    public Booking getBooking(int id) {
+        for (Booking booking : list) {
+            if (booking.getID() == id) {
+                return booking;
+            }
+        }
+        return null;
     }
 
-    public String getTutEmail() {
-        return tutEmail;
+    public ArrayList<Booking> getBookingByStuEmail(String stuEmail) {
+        ArrayList<Booking> list2 = new ArrayList<>();
+        for (Booking booking : list) {
+            if (booking.getStuEmail().equals(stuEmail)) {
+                list2.add(booking);
+            }
+        }
+        return list2;
     }
 
-    public void setTutEmail(String tutEmail) {
-        this.tutEmail = tutEmail;
+    public ArrayList<Booking> getBookingBySubject(String subject) {
+        ArrayList<Booking> list2 = new ArrayList<>();
+        for (Booking booking : list) {
+            if (booking.getSubject().equals(subject)) {
+                list2.add(booking);
+            }
+        }
+        return list2;
     }
 
-    public String getSubject() {
-        return subject;
+    public ArrayList<Booking> getBookingByStatus(String bookStatus) {
+        ArrayList<Booking> list2 = new ArrayList<>();
+        for (Booking booking : list) {
+            if (booking.getBookStatus().equals(bookStatus)) {
+                list2.add(booking);
+            }
+        }
+        return list2;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public Booking getBookingByTutEmail(String tutEmail) {
+        for (Booking booking : list) {
+            if (booking.getTutEmail().equals(tutEmail)) {
+                return booking;
+            }
+        }
+        return null;
     }
 
-    public String getStuName() {
-        return stuName;
+    public int getLastBooking() {
+        id = 0;
+        for (Booking booking : list) {
+            id++;
+        }
+        return id;
     }
-
-    public void setStuName(String stuName) {
-        this.stuName = stuName;
-    }
-
-    public String getStuEmail() {
-        return stuEmail;
-    }
-
-    public void setStuEmail(String stuEmail) {
-        this.stuEmail = stuEmail;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    
 }
