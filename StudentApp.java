@@ -43,7 +43,6 @@ public class StudentApp implements Serializable {
     }
 
     public Students getStudents() {
-        System.out.println("xxxxxxxxxxxxx");
         return students;
     }
 
