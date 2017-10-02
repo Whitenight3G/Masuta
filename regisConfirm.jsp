@@ -27,7 +27,7 @@
                 String user = request.getParameter("user");
                 if (students.getStudent(email) == null && tutors.getTutor(email) == null) {
                     if (user.equals("Tutor")) {
-                        Tutor tutor = new Tutor(name, email, password, dob, request.getParameter("subject"), request.getParameter("status"));
+                        Tutor tutor = new Tutor(email, name, password, dob, request.getParameter("subject"), request.getParameter("status"));
                         tutors.addTutor(tutor);%>
                         <p>New tutor has been added. click <a href="Main.jsp"><u>here</u></a> to go to your main page.</p>
                         <%
