@@ -22,7 +22,7 @@
                         } else {
                             this.form['subject'].style.visibility = 'hidden';
                         }
-                        ;">
+                        ;" required>
                             <option value="">- Select User Type -</option>
                             <option value="Student">Student</option>
                             <option value="Tutor">Tutor</option>
@@ -36,8 +36,7 @@
                             <option value="AppProg">Applications Programming</option>
                             <option value="MobileApp">Mobile Applications</option>
                         </select></td></tr>
-
-                <tr><td></td> <td><input type="submit" value="Register"></td></tr>
+                <tr><td><input type="hidden" name="status" value="available"></td> <td><input type="submit" value="Register"></td></tr>
             </table>
         </form>
     </body>
