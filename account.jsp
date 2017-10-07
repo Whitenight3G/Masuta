@@ -21,6 +21,7 @@
         width:230px;
     }
 </style>
+<p align="left"><u><a href="<% out.print(request.getHeader("Referer"));%>">Back</a></u></p>
 <p>Click <a href="logout.jsp">here</a> to log out your account</p>
 <%if (session.getAttribute("user") != null) {
         if (session.getAttribute("user").getClass().toString().equals("class uts.wsd.Tutor")) {
