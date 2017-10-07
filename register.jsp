@@ -16,7 +16,7 @@
                 <tr><td>Full name</td> <td><input type="text" name="name" required></td></tr>
                 <tr><td>Email</td> <td><input type="email" name="email" required></td></tr>
                 <tr><td>Password</td> <td><input type="password" name="password" required></td></tr>
-                <tr><td>Date of birth</td> <td><input type="date" name="dob" required></td></tr>
+                <tr><td>Date of birth</td> <td><input type="date" name="dob" pattern="\d{1,2}/\d{1,2}/\d{4}" required></td></tr>
                 <tr><td>User</td> <td> <select name="user" onchange="if (this.value === 'Tutor') {
                             this.form['subject'].style.visibility = 'visible';
                         } else {
@@ -38,6 +38,7 @@
                         </select></td></tr>
                 <tr><td><input type="hidden" name="status" value="available"></td> <td><input type="submit" value="Register"></td></tr>
             </table>
+            <p align="center">Already have an account? <a href="Login.html">Sign in</a></p>
         </form>
     </body>
 </html>

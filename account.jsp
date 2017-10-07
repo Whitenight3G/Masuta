@@ -6,7 +6,21 @@
         <title>Main Page</title>
     <h1 align="center" style="font-size:185px; background-color:white"><img src="Images/uts.jpg" alt="uts">Tutor</h1>
 </head>
-
+<style type="text/css">
+    table.account{                
+        border-collapse: collapse;
+        border: 1px solid black;
+    }
+    thead.h{
+        text-align: center;
+        font-weight: bold;
+    }
+    td.a{
+        border: 1px solid black;     
+        padding: 2px;
+        width:230px;
+    }
+</style>
 <p>Click <a href="logout.jsp">here</a> to log out your account</p>
 <%if (session.getAttribute("user") != null) {
         if (session.getAttribute("user").getClass().toString().equals("class uts.wsd.Tutor")) {
@@ -39,16 +53,29 @@
     <h1>My Account</h1>
 
     <form action="account.jsp" method="POST">
-
+        <table class="account">
+            <thead class="h">
+                <tr>
+                    <td class="a">Name</td><td class="a" >Email</td><td class="a">Date of Birth</td><td class="a">Subject</td><td class="a">Status</td>
+                </tr>
+            </thead>
+            <tbody >
+                <tr>
+                    <td class="a" >${user.name}</td><td class="a">${user.email}</td><td class="a">${user.dob}</td><td class="a">${user.subject}</td><td class="a">${user.status}</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Change your account detail  <input type="submit" name="editUser" value="Change"></p>
+        <hr>
+        <% if (request.getParameter("editUser") != null) {
+        %>
         <table>
 
             <tr><td>Name</td><td><input type="text" value="<%= tutor.getName()%>" name="name"></td></tr>
             <tr><td>Email</td><td><input type="email" value="<%= tutor.getEmail()%>" name="email"></td></tr>
             <tr><td>Password</td><td><input type="password" value="<%= tutor.getPassword()%>" name="password"></td></tr>
             <tr><td>Date of birth</td><td><input type="date" value="<%= tutor.getDob()%>" name="dob"></td></tr>
-            <tr><td>Your chosen subject: <%=tutor.getSubject()%></td></tr>
-            <tr><td>You current status: <%=tutor.getStatus()%></td></tr>
-            
+
             <tr><td></td><td><input type="submit" value="Save"></td></tr>
         </table>
 
@@ -61,6 +88,7 @@
         %>
 
         <input type="hidden" name="submitted" value="yes">
+        <% } %>
         <p>Return to the <a href="Main.jsp">main page</a>.</p>
 
     </form>
@@ -79,7 +107,7 @@
         String user = request.getParameter("user");%>
 
 <body background="Images/wool.jpg">
-    
+
     <%
 
         if (request.getParameter("email") != null) {
@@ -92,18 +120,34 @@
     <p>Details updated.</p>
     <%            }
     %>
-    
+
     <h1>My Account</h1>
 
     <form action="account.jsp" method="POST">
+        <table class="account">
+            <thead class="h">
+                <tr>
+                    <td class="a">Name</td><td class="a" >Email</td><td class="a">Date of Birth</td>
+                </tr>
+            </thead>
+            <tbody >
+                <tr>
+                    <td class="a" >${user.name}</td><td class="a">${user.email}</td><td class="a">${user.dob}</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Change your account detail <input type="submit" name="editUser" value="Change"></p>
 
+        <hr>
+        <% if (request.getParameter("editUser") != null) {
+        %>
         <table>
 
             <tr><td>Name</td><td><input type="text" value="<%= student.getName()%>" name="name"></td></tr>
             <tr><td>Email</td><td><input type="email" value="<%= student.getEmail()%>" name="email"></td></tr>
             <tr><td>Password</td><td><input type="password" value="<%= student.getPassword()%>" name="password"></td></tr>
             <tr><td>Date of birth</td><td><input type="date" value="<%= student.getDob()%>" name="dob"></td></tr>
-            
+
             <tr><td></td><td><input type="submit" value="Save"></td></tr>
         </table>
 
@@ -116,9 +160,19 @@
         %>
 
         <input type="hidden" name="submitted" value="yes">
-        <p>Return to the <a href="Main.jsp">main page</a>.</p>
-
+        <% } %>
     </form>
+    <form action="logout.jsp">
+        <%String filePath = application.getRealPath("WEB-INF/students.xml");%>
+        <jsp:useBean id="studentApp" class="uts.wsd.StudentApp" scope="application">
+            <jsp:setProperty name="studentApp" property="filePath" value="<%=filePath%>"/>
+        </jsp:useBean>
+        <% Students students = studentApp.getStudents();%>
+        <p>Remove account</p><input type="submit" onclick="alert('You are about to remove your account!')<%students.removeStudent(student);%>" value="Remove">
+    </form>
+    <p>Return to the <a href="Main.jsp">main page</a>.</p>
+
+
 </body>
 
 <%}
